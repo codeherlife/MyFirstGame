@@ -1,6 +1,7 @@
 package com.codeherlife.myfirstgame;
 
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -29,5 +30,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){}
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        return super.onTouchEvent(event);
+    }
 
 }
