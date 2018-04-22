@@ -31,5 +31,23 @@ public class MainThread extends Thread {
         long totalTime = 0;
         int frameCount = 0;
         long targetTime = 1000/FPS;
+
+        while(running)
+            startTime = System.nanoTime();
+            canvas = null;
+
+            //try locking the canvas for pixel editing
+            try {
+                canvas = this.surfaceHolder.lockCanvas();
+                synchronized (surfaceHolder)
+                {
+                    this.gamePanel.update();
+                    this.gamePanel.draw(canvas);
+                }
+            }catch(Exception e){}
+            timeMillis = (System.nanoTime()-startTime)/1000000;
+
+            //stopped here at 14:27 episode 2
+        }
     }
-}
+
