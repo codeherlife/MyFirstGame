@@ -17,37 +17,52 @@ public class MainThread extends Thread {
     public static Canvas canvas;
 
     //the constructor, call the constructor with the super class and override the run method inside class thread
-    public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel){
+    public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel) {
 
         super();
         this.surfaceHolder = surfaceHolder;
         this.gamePanel = gamePanel;
     }
+
     @Override
-    public void run(){
+    public void run() {
         long startTime;
         long timeMillis;
         long waitTime;
         long totalTime = 0;
         int frameCount = 0;
-        long targetTime = 1000/FPS;
+        long targetTime = 1000 / FPS;
 
-        while(running)
+        while (running) {
             startTime = System.nanoTime();
             canvas = null;
 
             //try locking the canvas for pixel editing
             try {
                 canvas = this.surfaceHolder.lockCanvas();
-                synchronized (surfaceHolder)
-                {
+                synchronized (surfaceHolder) {
                     this.gamePanel.update();
                     this.gamePanel.draw(canvas);
                 }
-            }catch(Exception e){}
-            timeMillis = (System.nanoTime()-startTime)/1000000;
+            } catch (Exception e) {
+            }
+            timeMillis = (System.nanoTime() - startTime) / 1000000;
+            waitTime = targetTime - timeMillis;
+            try {
+                this.sleep(waitTime);
+            } catch (Exception e) {
+            }
 
-            //stopped here at 14:27 episode 2
+            totalTime += System.nanoTime() - startTime;
+            frameCount++;
+            if (frameCount == FPS) {
+                averageFPS = 1000/((totalTime/frameCount)/1000000);
+                frameCount = 0;
+                totalTime = 0;
+                System.out.println(averageFPS);
+            }
+
         }
     }
 
+}
