@@ -46,8 +46,18 @@ public class MainThread extends Thread {
                 }
             } catch (Exception e) {
             }
+            finally {
+                if(canvas!=null){
+                    try {
+                        surfaceHolder.unlockCanvasAndPost(canvas);
+                    }
+                    catch (Exception e){e.printStackTrace();}
+                }
+            }
+
             timeMillis = (System.nanoTime() - startTime) / 1000000;
             waitTime = targetTime - timeMillis;
+
             try {
                 this.sleep(waitTime);
             } catch (Exception e) {
