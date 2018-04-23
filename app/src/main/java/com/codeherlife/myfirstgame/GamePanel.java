@@ -11,6 +11,7 @@ import android.view.SurfaceView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
+    private MainThread thread;
     // the constructor. When you create the object the constructor is called.
     public GamePanel(Context context)
     {
@@ -26,14 +27,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height){}
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder){}
+    public void surfaceDestroyed(SurfaceHolder holder){
+        boolean retry = true;
+        while(retry){
+
+            try{thread.setRunning(false);
+                thread.join();
+
+            }catch (InterruptedException e){e.printStackTrace();}
+            retry = false;
+        }
+    }
 
     @Override
-    public void surfaceCreated(SurfaceHolder holder){}
+    public void surfaceCreated(SurfaceHolder holder){
+        //we can safely start the game loop
+        thread.setRunning(true);
+        thread.start();
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
         return super.onTouchEvent(event);
     }
+    public void update (){
 
+    }
 }

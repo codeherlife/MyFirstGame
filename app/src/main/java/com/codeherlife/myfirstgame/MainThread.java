@@ -64,5 +64,8 @@ public class MainThread extends Thread {
 
         }
     }
+    public void setRunning(boolean b){
 
+        running = b;
+    }
 }
