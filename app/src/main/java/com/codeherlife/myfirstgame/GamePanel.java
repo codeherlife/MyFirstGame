@@ -2,6 +2,7 @@ package com.codeherlife.myfirstgame;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -12,6 +13,7 @@ import android.view.SurfaceView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
+    public static final WIDTH = 856
     private MainThread thread;
     private Background bg;
 
@@ -50,6 +52,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder){
 
         bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.grassbg1));
+        bg.setVector(-5);
         //we can safely start the game loop
         thread.setRunning(true);
         thread.start();
@@ -63,5 +66,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         bg.update();
 
+    }
+
+    @Override
+    public void draw(Canvas canvas)
+    {
+        bg.draw(canvas);
     }
 }
