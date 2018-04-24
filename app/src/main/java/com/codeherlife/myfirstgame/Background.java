@@ -30,7 +30,7 @@ public class Background {
         canvas.drawBitmap(image, x, y, null);
         if(x<0)
         {
-            canvas.drawBitmap(image, x+);
+            canvas.drawBitmap(image, x+GamePanel.WIDTH, y, null);
         }
     }
 

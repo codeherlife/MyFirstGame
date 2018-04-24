@@ -13,7 +13,8 @@ import android.view.SurfaceView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
-    public static final WIDTH = 856
+    public static final int WIDTH = 856;
+    public static final int HEIGHT = 480;
     private MainThread thread;
     private Background bg;
 
