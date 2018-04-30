@@ -13,10 +13,12 @@ public class Background {
     private int x, y, dx;
 
     //the constructor:
-    public Background(Bitmap res){
-
+    public Background(Bitmap res)
+    {
         image = res;
+        dx = GamePanel.MOVESPEED;
     }
+
     public void update()
     {
         x+=dx;
@@ -34,8 +36,5 @@ public class Background {
         }
     }
 
-    public void setVector(int dx)
-    {
-        this.dx = dx;
-    }
+
 }
