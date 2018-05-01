@@ -34,5 +34,25 @@ public class Player extends GameObject{
 
         animation.setFrames(image);
         animation.setDelay(10);
+        startTime = System.nanoTime();
+    }
+
+    public void setUp(boolean b){
+        up = b;
+    }
+    public void update(){
+        long elapsed = (System.nanoTime()- startTime)/1000000;
+        if(elapsed > 100){
+            score++;
+            startTime = System.nanoTime();
+        }
+        animation.update();
+
+        if(up){
+            dy = (int)(dya -=1.1);
+        }
+        else{
+            dy = (int)(dya +=1/1);
+        }
     }
 }
