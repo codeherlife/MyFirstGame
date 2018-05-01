@@ -1,6 +1,7 @@
 package com.codeherlife.myfirstgame;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.view.animation.Animation;
 
 /**
@@ -54,5 +55,21 @@ public class Player extends GameObject{
         else{
             dy = (int)(dya +=1/1);
         }
+
+        if(dy>14)dy = 14;
+        if(dy<-14)dy = -14;
+
+        y += dy*2;
+        dy = 0;
+
     }
+
+    public void draw(Canvas canvas){
+        canvas.drawBitmap(animation.getImage(),x,y,null);
+    }
+    public int getScore(){ return score;}
+    public boolean getPlaying(){ return playing;}
+    public void setPlaying(boolean b){playing = b;}
+    public void resetDYA(){ dya = 0;}
+    public void resetScore(){ score = 0;}
 }
