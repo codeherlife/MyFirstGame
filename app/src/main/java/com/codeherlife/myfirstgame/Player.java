@@ -2,7 +2,7 @@ package com.codeherlife.myfirstgame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.view.animation.Animation;
+
 
 /**
  * Created by melanie on 4/29/18.
@@ -19,6 +19,7 @@ public class Player extends GameObject{
 
     public Player(Bitmap res, int w, int h, int numFrames)
     {
+
         x = 100;
         y = GamePanel.HEIGHT/2;
         dy = 0;
