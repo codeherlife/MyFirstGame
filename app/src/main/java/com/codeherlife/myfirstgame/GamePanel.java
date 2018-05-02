@@ -62,7 +62,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event)
+    {
         return super.onTouchEvent(event);
     }
 
@@ -79,6 +80,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         final float scaleFactorX = getWidth()/(WIDTH*1.f);
         final float scaleFactorY = getHeight()/(HEIGHT*1.f);
+
         if(canvas!=null)
         {
             final int savedState = canvas.save();
@@ -89,4 +91,5 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
     }
+
 }
