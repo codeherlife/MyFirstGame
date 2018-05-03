@@ -28,6 +28,7 @@ public class Player extends GameObject{
         width = w;
 
         Bitmap[] image = new Bitmap[numFrames];
+        spritesheet = res;
 
         for(int i =0; i < image.length; i++)
         {
