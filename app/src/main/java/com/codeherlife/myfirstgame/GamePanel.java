@@ -112,6 +112,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 smoke.add(new Smokepuff(player.getX(), player.getY()+10));
                 smokeStartTime = System.nanoTime();
             }
+
+            //update smoke puffs and remove them accordingly
+            for(int i=0; i<smoke.size(); i++)
+            {
+                smoke.get(i).update();
+
+            }
+
         }
     }
 
