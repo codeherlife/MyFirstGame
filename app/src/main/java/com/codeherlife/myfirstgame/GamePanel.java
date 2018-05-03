@@ -45,9 +45,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             try{thread.setRunning(false);
                 thread.join();
+                retry = false;
 
             }catch (InterruptedException e){e.printStackTrace();}
-            retry = false;
+
         }
     }
 
