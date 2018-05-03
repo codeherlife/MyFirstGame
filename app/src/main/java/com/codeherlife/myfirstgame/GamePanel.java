@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 /**
  * Created by melanie on 4/16/18.
  */
@@ -19,6 +21,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread thread;
     private Background bg;
     private Player player;
+    private ArrayList<Smokepuff> smoke;
 
     // the constructor. When you create the object the constructor is called.
     public GamePanel(Context context)
