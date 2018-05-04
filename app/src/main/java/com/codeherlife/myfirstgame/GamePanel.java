@@ -117,9 +117,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             for(int i=0; i<smoke.size(); i++)
             {
                 smoke.get(i).update();
-
+                if(smoke.get(i).getX()<-10)
+                {
+                    smoke.remove(i);
+                }
             }
-
         }
     }
 
@@ -135,6 +137,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.scale(scaleFactorX, scaleFactorY);
             bg.draw(canvas);
             player.draw(canvas);
+            for(Smokepuff sp:smoke)
+            {
+                sp.draw(canvas);
+            }
+
+
+
+
             canvas.restoreToCount(savedState);
         }
 
