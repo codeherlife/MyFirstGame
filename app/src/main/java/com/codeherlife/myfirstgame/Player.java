@@ -61,7 +61,7 @@ public class Player extends GameObject{
         if(dy<-14)dy = -14;
 
         y += dy*2;
-        dy = 0;
+
 
     }
 
