@@ -64,7 +64,7 @@ public class Missile extends GameObject {
     public int getWidth()
     {
         //offset slightly for more realistic collision detection
-
+        return width-10;
     }
 
 }

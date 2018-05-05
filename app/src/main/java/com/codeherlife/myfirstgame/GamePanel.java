@@ -19,10 +19,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int HEIGHT = 480;
     public static final int MOVESPEED = -5;
     private long smokeStartTime;
+    private long missileStartTime;
+    private long missileElapsed;
     private MainThread thread;
     private Background bg;
     private Player player;
     private ArrayList<Smokepuff> smoke;
+    private ArrayList<Missile> missiles;
 
     // the constructor. When you create the object the constructor is called.
     public GamePanel(Context context)
@@ -64,9 +67,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.grassbg1));
         player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.helicopter), 65, 25, 3);
         smoke = new ArrayList<Smokepuff>();
+        missiles = new ArrayList<Missile>();
 
         //going to make little smoke puffs come out one at a time instead of constant stream of puffs.
         smokeStartTime = System.nanoTime();
+        missileStartTime = System.nanoTime();
 
         //we can safely start the game loop
         thread.setRunning(true);
@@ -104,9 +109,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             bg.update();
             player.update();
 
+            //add missiles on timer
+            long missilesElapsed = (System.nanoTime()- missileStartTime)/ 1000000;
+
+            //add smokepuffs on timer
             long elapsed = (System.nanoTime() - smokeStartTime) / 1000000);
 
-//if elapsed time is greater than 120 then add a new smoke puff.
+            //if elapsed time is greater than 120 then add a new smoke puff.
             if(elapsed > 120)
             {
                 smoke.add(new Smokepuff(player.getX(), player.getY()+10));
