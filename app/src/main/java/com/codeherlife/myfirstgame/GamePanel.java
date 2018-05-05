@@ -8,6 +8,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by melanie on 4/16/18.
@@ -26,6 +27,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Player player;
     private ArrayList<Smokepuff> smoke;
     private ArrayList<Missile> missiles;
+    private Random rand = new Random();
 
     // the constructor. When you create the object the constructor is called.
     public GamePanel(Context context)
@@ -111,6 +113,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             //add missiles on timer
             long missilesElapsed = (System.nanoTime()- missileStartTime)/ 1000000;
+            if(missilesElapsed > (2000 - player.getScore()/4)){
+
+                //first missile always go down the middle
+                if(missiles.size()==0)
+                {
+                    missiles.add(new Missile(BitmapFactory.decodeResource(getResources(), R.drawable.missile), WIDTH + 10, HEIGHT/2, 45, 15, player.getScore(), 13));
+                }
+                else
+                {
+                    missiles.add(new Missile(BitmapFactory.decodeResource(getResources()R.drawable.missile), WIDTH+10, (int)((rand.nextDouble()*((HEIGHT))))
+
+                }
+                //reset timer
+                missileStartTime = System.nanoTime();
+            }
 
             //add smokepuffs on timer
             long elapsed = (System.nanoTime() - smokeStartTime) / 1000000);
