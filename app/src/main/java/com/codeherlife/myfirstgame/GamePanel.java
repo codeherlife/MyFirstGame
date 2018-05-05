@@ -22,7 +22,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int MOVESPEED = -5;
     private long smokeStartTime;
     private long missileStartTime;
-    private long missileElapsed;
+
     private MainThread thread;
     private Background bg;
     private Player player;
@@ -116,6 +116,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             long missilesElapsed = (System.nanoTime()- missileStartTime)/ 1000000;
             if(missilesElapsed > (2000 - player.getScore()/4)){
 
+                System.out.println("making missile");
                 //first missile always go down the middle
                 if(missiles.size()==0)
                 {
@@ -152,7 +153,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
 
             //add smokepuffs on timer
-            long elapsed = (System.nanoTime() - smokeStartTime) / 1000000);
+            long elapsed = (System.nanoTime() - smokeStartTime) / 1000000;
 
             //if elapsed time is greater than 120 then add a new smoke puff.
             if(elapsed > 120)
@@ -183,24 +184,27 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override
-    public void draw(Canvas canvas)
-    {
-        final float scaleFactorX = getWidth()/(WIDTH*1.f);
-        final float scaleFactorY = getHeight()/(HEIGHT*1.f);
+    public void draw(Canvas canvas) {
 
-        if(canvas!=null)
-        {
+        //android studio recommended i add the following line of code although wasn't indicated in tutorial
+        super.draw(canvas);
+
+        final float scaleFactorX = getWidth() / (WIDTH * 1.f);
+        final float scaleFactorY = getHeight() / (HEIGHT * 1.f);
+
+        if (canvas != null) {
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             bg.draw(canvas);
             player.draw(canvas);
-            for(Smokepuff sp:smoke)
-            {
+
+            //draw smokepuffs
+            for (Smokepuff sp : smoke) {
                 sp.draw(canvas);
             }
 
-            for(Missile m:missiles)
-            {
+            //draw missiles
+            for (Missile m : missiles) {
                 m.draw(canvas);
             }
 
