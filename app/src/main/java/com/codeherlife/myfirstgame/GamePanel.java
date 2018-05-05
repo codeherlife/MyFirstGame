@@ -3,6 +3,7 @@ package com.codeherlife.myfirstgame;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -132,6 +133,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             //loop through every missile
             for(int i=0; i<missiles.size(); i++){
+
+                //update missile
                 missiles.get(i).update();
                 if(collision(missiles.get(i), player))
                 {
@@ -170,6 +173,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    public boolean collision(GameObject a, GameObject b)
+    {
+        if(Rect.intersects(a.getRectangle(), b.getRectangle()))
+        {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void draw(Canvas canvas)
     {
@@ -187,7 +199,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 sp.draw(canvas);
             }
 
-
+            for(Missile m:missiles)
+            {
+                m.draw(canvas);
+            }
 
 
             canvas.restoreToCount(savedState);
