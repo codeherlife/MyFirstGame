@@ -122,11 +122,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 }
                 else
                 {
-                    missiles.add(new Missile(BitmapFactory.decodeResource(getResources()R.drawable.missile), WIDTH+10, (int)((rand.nextDouble()*((HEIGHT))))
+                    missiles.add(new Missile(BitmapFactory.decodeResource(getResources(),R.drawable.missile),
+                            WIDTH+10, (int)(rand.nextDouble()*(HEIGHT)), 45,15, player.getScore(), 13));
 
                 }
                 //reset timer
                 missileStartTime = System.nanoTime();
+            }
+
+            //loop through every missile
+            for(int i=0; i<missiles.size(); i++){
+                missiles.get(i).update();
+                if(collision(missiles.get(i), player))
+                {
+                    missiles.remove(i);
+                    player.setPlaying(false);
+                    break;
+                }
+
+                //remove missile if it is way off the screen
+                if(missiles.get(i).getX()<-100)
+                {
+                    missiles.remove(i);
+                    break;
+                }
             }
 
             //add smokepuffs on timer
