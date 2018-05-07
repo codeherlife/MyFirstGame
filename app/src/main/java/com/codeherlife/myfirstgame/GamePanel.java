@@ -123,10 +123,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             bg.update();
             player.update();
 
-            //create top border
+            //calculate the threshold of height the border can have, based on the score.
+            //max and min border height are updated, and the border switched direction when either max or min is met.
 
-            //create bottom border
+            maxBorderHeight = 30+player.getScore()/progressDenom;
+            //cap max border height so that borders can only take up a total of 1/2 of the screen
+            if(maxBorderHeight > HEIGHT/4) maxBorderHeight = HEIGHT/4;
+            minBorderHeight = 5+player.getScore()/progressDenom;
 
+            //update top border
+            this.updateTopBorder();
+
+            //update bottom border
+            this.updateBottomBorder();
 
             //add missiles on timer
             long missilesElapsed = (System.nanoTime()- missileStartTime)/ 1000000;
