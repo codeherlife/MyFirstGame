@@ -239,10 +239,23 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void updateBottomBorder()
     {
-
+        //every 50 points, insert randomly placed top blocks that break the pattern
+        if(player.getScore()%50==0)
+        {
+            topborder.add(new TopBorder(BitmapFactory.decodeResource(getResources(),R.drawable.brick),
+                    topborder.get(topborder.size()-1).getX()+20, 0, (int)((rand.nextDouble()*(maxBorderHeight
+            ))+1)));
+        }
     }
     public void updateTopBorder()
     {
+        //every 40 points, insert randomly placed bottom blocks that break pattern
+        if(player.getScore()%40 == 0)
+        {
+            botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick),
+                    botborder.get(botborder.size()-1).getX()+20, (int)((rand.nextDouble()
+                    *maxBorderHeight)+ (HEIGHT-maxBorderHeight))));
+        }
 
     }
 
