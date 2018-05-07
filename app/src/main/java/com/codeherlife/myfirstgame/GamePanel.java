@@ -28,7 +28,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Player player;
     private ArrayList<Smokepuff> smoke;
     private ArrayList<Missile> missiles;
+    private ArrayList<TopBorder> topborder;
+    private ArrayList<BotBorder> botborder;
     private Random rand = new Random();
+    private int maxBorderHeight;
+    private int minBorderHeight;
+    private boolean topDown = true;
+    private boolean botDown = true;
+
+    //increase to slow down difficulty progression, decrease to speed up difficulty progression
+    private int progressDenom = 20;
 
     // the constructor. When you create the object the constructor is called.
     public GamePanel(Context context)
@@ -71,6 +80,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.helicopter), 65, 25, 3);
         smoke = new ArrayList<Smokepuff>();
         missiles = new ArrayList<Missile>();
+        topborder = new ArrayList<TopBorder>();
+        botborder = new ArrayList<BotBorder>();
 
         //going to make little smoke puffs come out one at a time instead of constant stream of puffs.
         smokeStartTime = System.nanoTime();
@@ -111,6 +122,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             bg.update();
             player.update();
+
+            //create top border
+
+            //create bottom border
+
 
             //add missiles on timer
             long missilesElapsed = (System.nanoTime()- missileStartTime)/ 1000000;
@@ -207,10 +223,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             for (Missile m : missiles) {
                 m.draw(canvas);
             }
-
-
             canvas.restoreToCount(savedState);
         }
+
+    }
+
+    public void updateBottomBorder()
+    {
+
+    }
+    public void updateTopBorder()
+    {
 
     }
 
