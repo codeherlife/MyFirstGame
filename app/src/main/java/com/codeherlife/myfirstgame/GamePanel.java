@@ -246,6 +246,40 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     topborder.get(topborder.size()-1).getX()+20, 0, (int)((rand.nextDouble()*(maxBorderHeight
             ))+1)));
         }
+        for(int i=0; i<topborder.size(); i++)
+        {
+            topborder.get(i).update();
+            if(topborder.get(i).getX()<-20)
+            {
+                topborder.remove(i);
+                //remove element of arraylist, replace it by adding a new one
+
+                //calculate topdown which determines the direction the border is moving (up or down)
+                if(topborder.get(topborder.size()-1).getHeight()>=maxBorderHeight)
+                {
+                    topDown = false;
+                }
+                //(retrieve the last element in the arraylist)
+                if(topborder.get(topborder.size()-1).getHeight()<=minBorderHeight)
+                {
+                    topDown = true;
+                }
+                //new border added will have larger height
+                if(topDown)
+                {
+                    topborder.add(new TopBorder(BitmapFactory.decodeResource(getResources(),
+                            R.drawable.brick), topborder.get(topborder.size()-1).getX()+20,
+                            0, topborder.get(topborder.size()-1).getHeight()+1));
+                }
+                //new border added will have smaller height
+                else
+                {
+                    topborder.add(new TopBorder(BitmapFactory.decodeResource(getResources(),
+                            R.drawable.brick), topborder.get(topborder.size()-1).getX()+20,
+                            0, topborder.get(topborder.size()-1).getHeight()-1));
+                }
+            }
+        }
     }
     public void updateTopBorder()
     {
