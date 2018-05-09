@@ -380,7 +380,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         //reset min border height
         minBorderHeight = 5;
         maxBorderHeight = 30;
-
+        player.resetDY();
         player.resetScore();
         player.setY(HEIGHT/2);
 
