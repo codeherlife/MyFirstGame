@@ -200,6 +200,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 }
             }
         }
+        else {
+            newGameCreated = false;
+            if(!newGameCreated) {
+                newGame();
+            }
+        }
     }
 
     public boolean collision(GameObject a, GameObject b)
