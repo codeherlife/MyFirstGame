@@ -50,7 +50,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         //add the callback to the surface holder to intercept events
         getHolder().addCallback(this);
 
-        thread = new MainThread(getHolder(), this);
 
         //make game panel focusable so it can handle events
         setFocusable(true);
@@ -70,6 +69,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             try{thread.setRunning(false);
                 thread.join();
                 retry = false;
+                thread = null;
 
             }catch (InterruptedException e){e.printStackTrace();}
 
@@ -90,6 +90,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         smokeStartTime = System.nanoTime();
         missileStartTime = System.nanoTime();
 
+        thread = new MainThread(getHolder(), this);
         //we can safely start the game loop
         thread.setRunning(true);
         thread.start();
