@@ -341,12 +341,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
 
                 //determine if border will be moving up or down
-                if (botborder.get(botborder.size() - 1).getHeight() >= maxBorderHeight) {
-                    botDown = false;
+                if (botborder.get(botborder.size() - 1).getY() <= HEIGHT- maxBorderHeight) {
+                    botDown = true;
                 }
 
-                if (botborder.get(botborder.size() - 1).getHeight() <= minBorderHeight) {
-                    botDown = true;
+                if (botborder.get(botborder.size() - 1).getY() >= HEIGHT- minBorderHeight) {
+                    botDown = false;
                 }
 
                 //adding new borders- So if botDown we'll be adding borders that is 1 less than the last in the array.
