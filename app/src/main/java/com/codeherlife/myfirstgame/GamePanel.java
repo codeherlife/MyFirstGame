@@ -42,6 +42,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     //increase to slow down difficulty progression, decrease to speed up difficulty progression
     private int progressDenom = 20;
 
+    //creating these variables to reset the player back to the original position, when he dies.
+    private Explosion explosion;
+    private long startReset;
+    private boolean reset;
+    private boolean dissapear;
+    private boolean started;
+
+
+
     // the constructor. When you create the object the constructor is called.
     public GamePanel(Context context)
     {
@@ -101,13 +110,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         if(event.getAction()==MotionEvent.ACTION_DOWN)
         {
-            if(!player.getPlaying())
+            if(!player.getPlaying() && newGameCreated && reset)
             {
                 player.setPlaying(true);
                 player.setUp(true);
             }
-            else
+            if(player.getPlaying())
             {
+                if(!started) started= true;
+                reset = false;
                 player.setUp(true);
             }
             return true;
