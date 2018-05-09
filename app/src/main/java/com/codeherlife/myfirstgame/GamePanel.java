@@ -13,6 +13,8 @@ import java.util.Random;
 
 /**
  * Created by melanie on 4/16/18.
+ * Game obective- (difficulty)- based on max and min border height- as player scores go up the borders start to
+ * take up more and more of the screen.
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
@@ -229,10 +231,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
 
             //draw missiles
-            for (Missile m : missiles) {
+            for (Missile m: missiles) {
                 m.draw(canvas);
             }
             canvas.restoreToCount(savedState);
+
+            //draw topborder
+
+
+
         }
 
     }
@@ -315,13 +322,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             //adding new borders- So if botDown we'll be adding borders that is 1 less than the last in the array.
             //ELSe, we will be adding a border that is one more than the last element in the array.
-            if(botDown)
-            {
 
+            if(botDown)
+            //x position is last element in the array plus 20, because width is 20.
+            {
+                botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
+                ), botborder.get(botborder.size()-1).getX()+20, botborder.get(botborder.size()-1
+                ).getY() + 1));
             }
             else
             {
-
+                botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
+                ), botborder.get(botborder.size()-1).getX()+20, botborder.get(botborder.size()-1
+                ).getY() - 1));
+                // - 1 because it is moving upwards.
             }
 
         }
