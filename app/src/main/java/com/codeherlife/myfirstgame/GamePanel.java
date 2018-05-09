@@ -237,8 +237,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.restoreToCount(savedState);
 
             //draw topborder
+            for(TopBorder tb: topborder)
+            {
+                tb.draw(canvas);
+            }
 
-
+            //draw botborder
+            for(BotBorder bb: botborder)
+            {
+                bb.draw(canvas);
+            }
 
         }
 
@@ -340,6 +348,58 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         }
 
+    }
+    //create the initial borders and the new game method. This will be called every time the player dies
+    // and we want to reset the game.
+    public void newGame()
+    {
+        botborder.clear();
+        topborder.clear();
+        missiles.clear();
+        smoke.clear();
+
+        //reset min border height
+        minBorderHeight = 5;
+        maxBorderHeight = 30;
+
+        player.resetScore();
+        player.setY(HEIGHT/2);
+
+        //create initial borders- this loop will create borders until they are width+40 off the screen.
+        //will create enough borders so they go off the screen slightly.
+
+        //initial top border
+        for(int i=0; i*20 < WIDTH+40; i++)
+        {
+            //first top border created
+            if(i==0)
+            {
+                topborder.add(new TopBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
+                ), i*20,0,10));
+            }
+            else
+            {
+                topborder.add(new TopBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
+                ), i*20,0,topborder.get(i-1).getHeight()+1));
+            }
+        }
+        //initial bottom border
+        for(int i=0; i*20 < WIDTH+40; i++)
+        {
+            //first border ever created
+            if(i==0)
+            {
+                botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(),R.drawable.brick)
+                ,i*20, HEIGHT- minBorderHeight));
+            }
+
+            //adding borders until the initial screen is filled.
+            else
+            {
+                botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick),
+                        i*20, botborder.get(i-1).getY()-1));
+            }
+        }
     }
 
 }
