@@ -1,6 +1,7 @@
 package com.codeherlife.myfirstgame;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 /**
  * Created by melanie on 5/9/18.
@@ -37,6 +38,23 @@ public class Explosion {
 
 
     }
+    public void draw(Canvas canvas)
+    {
+        if(!animation.playedOnce())
+        {
+            canvas.drawBitmap(animation.getImage(),x,y,null);
+        }
+    }
 
+    //we only want the explosion to play once so we're only going to update it if the animation has not completed
+    //its first round
+    public void update()
+    {
+        if(!animation.playedOnce())
+        {
+            animation.update();
+        }
+    }
+    public int getHeight() { return height;}
 
 }
