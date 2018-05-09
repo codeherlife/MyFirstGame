@@ -169,7 +169,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 else
                 {
                     missiles.add(new Missile(BitmapFactory.decodeResource(getResources(),R.drawable.missile),
-                            WIDTH+10, (int)(rand.nextDouble()*(HEIGHT)), 45,15, player.getScore(), 13));
+                            WIDTH+10, (int)(rand.nextDouble()*(HEIGHT - (maxBorderHeight * 2))+ maxBorderHeight), 45,15, player.getScore(), 13));
 
                 }
                 //reset timer
