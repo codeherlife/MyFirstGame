@@ -134,6 +134,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if(maxBorderHeight > HEIGHT/4) maxBorderHeight = HEIGHT/4;
             minBorderHeight = 5+player.getScore()/progressDenom;
 
+            //check bottom border collision
+            for(int i=0; i<botborder.size(); i++){
+                if(collision(botborder.get(i), player))
+                    player.setPlaying(false);
+
+            }
+
+            //check top border collision
+            for(int i=0; i<topborder.size(); i++)
+            {
+                //if there's a collision between the top border and the player
+                if(collision(topborder.get(i), player))
+                    player.setPlaying(false);
+
+            }
+
             //update top border
             this.updateTopBorder();
 
