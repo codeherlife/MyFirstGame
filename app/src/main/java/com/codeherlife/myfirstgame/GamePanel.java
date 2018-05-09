@@ -259,7 +259,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-    public void updateBottomBorder()
+    public void updateTopBorder()
     {
         //every 50 points, insert randomly placed top blocks that break the pattern
         if(player.getScore()%50==0)
@@ -303,7 +303,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
         }
     }
-    public void updateTopBorder()
+    public void updateBottomBorder()
     {
         //every 40 points, insert randomly placed bottom blocks that break pattern
         if(player.getScore()%40 == 0)
@@ -319,38 +319,34 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             botborder.get(i).update();
 
             //if border is moving off screen, remove it and add a corresponding new one.
-            if(botborder.get(i).getX()<-20)
-            {
+            if(botborder.get(i).getX()<-20) {
                 botborder.remove(i);
-            }
 
-            //determine if border will be moving up or down
-            if(botborder.get(botborder.size()-1).getHeight()>=maxBorderHeight)
-            {
-                botDown = false;
-            }
 
-            if(botborder.get(botborder.size()-1).getHeight()<=minBorderHeight)
-            {
-                botDown = true;
-            }
+                //determine if border will be moving up or down
+                if (botborder.get(botborder.size() - 1).getHeight() >= maxBorderHeight) {
+                    botDown = false;
+                }
 
-            //adding new borders- So if botDown we'll be adding borders that is 1 less than the last in the array.
-            //ELSe, we will be adding a border that is one more than the last element in the array.
+                if (botborder.get(botborder.size() - 1).getHeight() <= minBorderHeight) {
+                    botDown = true;
+                }
 
-            if(botDown)
-            //x position is last element in the array plus 20, because width is 20.
-            {
-                botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
-                ), botborder.get(botborder.size()-1).getX()+20, botborder.get(botborder.size()-1
-                ).getY() + 1));
-            }
-            else
-            {
-                botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
-                ), botborder.get(botborder.size()-1).getX()+20, botborder.get(botborder.size()-1
-                ).getY() - 1));
-                // - 1 because it is moving upwards.
+                //adding new borders- So if botDown we'll be adding borders that is 1 less than the last in the array.
+                //ELSe, we will be adding a border that is one more than the last element in the array.
+
+                if (botDown)
+                //x position is last element in the array plus 20, because width is 20.
+                {
+                    botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
+                    ), botborder.get(botborder.size() - 1).getX() + 20, botborder.get(botborder.size() - 1
+                    ).getY() + 1));
+                } else {
+                    botborder.add(new BotBorder(BitmapFactory.decodeResource(getResources(), R.drawable.brick
+                    ), botborder.get(botborder.size() - 1).getX() + 20, botborder.get(botborder.size() - 1
+                    ).getY() - 1));
+                    // - 1 because it is moving upwards.
+                }
             }
 
         }
