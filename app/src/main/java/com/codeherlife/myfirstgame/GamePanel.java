@@ -37,6 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private int minBorderHeight;
     private boolean topDown = true;
     private boolean botDown = true;
+    private boolean newGameCreated;
 
     //increase to slow down difficulty progression, decrease to speed up difficulty progression
     private int progressDenom = 20;
@@ -400,6 +401,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                         i*20, botborder.get(i-1).getY()-1));
             }
         }
+
+        // we want new game created to be called anytime the player dies.
+        newGameCreated = true;
     }
 
 }
