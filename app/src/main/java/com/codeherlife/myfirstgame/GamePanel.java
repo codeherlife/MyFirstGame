@@ -3,11 +3,15 @@ package com.codeherlife.myfirstgame;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -48,6 +52,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private boolean reset;
     private boolean dissapear;
     private boolean started;
+    private int best;
 
 
 
@@ -489,6 +494,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         // we want new game created to be called anytime the player dies.
         newGameCreated = true;
+    }
+    public void drawText(Canvas canvas)
+    {
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(30);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        //show the player their score multiplied by 3- bc ppl like bigger numbers.
+        canvas.drawText("DISTANCE: " + (player.getScore()*3), 10, HEIGHT - 10, paint);
+        canvas.drawText("BEST: " + best, WIDTH- 215, HEIGHT - 10, paint);
+
+        //new game is created,rest, and just waiting to play again(player not playing):
+        if(!player.getPlaying() && newGameCreated && reset)
+        {
+            Paint paint1 = new Paint();
+            paint1.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+            canvas.drawText("PRESS TO START", WIDTH/2-50, HEIGHT/2, paint1);
+
+            paint1.setTextSize(20);
+            canvas.drawText("PRESS AND HOLD TO GO UP", WIDTH/2-50, HEIGHT/2 + 20, paint1);
+            canvas.drawText("RELEASE TO GO DOWN", WIDTH/2-50, HEIGHT/2 + 40, paint1);
+
+        }
+
     }
 
 }
