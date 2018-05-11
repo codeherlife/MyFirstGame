@@ -136,6 +136,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         if(player.getPlaying()) {
 
+            if(botborder.isEmpty())
+            {
+                player.setPlaying(false);
+                return;
+            }
+            if(topborder.isEmpty())
+            {
+                player.setPlaying(false);
+                return;
+            }
+
             bg.update();
             player.update();
 
@@ -230,7 +241,25 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
         }
         else {
-            newGameCreated = false;
+            //if the player is not playing, reset DY. (Disappear is the var that determines if we're going to draw
+            //the helicopter or not. helicopter will disappear if reset hasn't been completed yet but the
+            //player is not playing.
+            player.resetDY();
+            if(!reset)
+            {
+                newGameCreated = false;
+                startReset = System.nanoTime();
+                reset = true;
+                dissapear = true;
+                explosion = new Explosion(BitmapFactory.decodeResource(getResources(),R.drawable.explosion), player.getX(),
+                        player.getY()-30, 100, 100, 25);
+            }
+
+            explosion.update();
+
+            //reset elapsed is how long you want to wait before resetting the player.
+            long resetElapsed = (System.nanoTime()-startReset)/1000000;
+
             if(!newGameCreated) {
                 newGame();
             }
