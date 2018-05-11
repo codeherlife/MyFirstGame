@@ -300,8 +300,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             bg.draw(canvas);
-            player.draw(canvas);
 
+            //helicopter will only appear if dissapear is false.
+            if(!dissapear) {
+                player.draw(canvas);
+            }
             //draw smokepuffs
             for (Smokepuff sp : smoke) {
                 sp.draw(canvas);
