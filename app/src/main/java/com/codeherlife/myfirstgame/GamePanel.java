@@ -257,14 +257,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             explosion.update();
 
-            //reset elapsed is how long you want to wait before resetting the player.
+            //reset elapsed is how long you want to wait before resetting the player, to start again.
             long resetElapsed = (System.nanoTime()-startReset)/1000000;
 
-            if(!newGameCreated) {
+
+            //if resetelapsed is greater than 2500 and the new game is not created yet, then create new game.
+            if(resetElapsed > 2500 && !newGameCreated)
+            {
                 newGame();
             }
-        }
+
+
+            }
+
     }
+
 
     public boolean collision(GameObject a, GameObject b)
     {
@@ -299,7 +306,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             for (Missile m: missiles) {
                 m.draw(canvas);
             }
-            canvas.restoreToCount(savedState);
 
             //draw topborder
             for(TopBorder tb: topborder)
@@ -312,6 +318,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 bb.draw(canvas);
             }
+            //draw explosion
+            if(started)
+            {
+                explosion.draw(canvas);
+            }
+            drawText(canvas);
+            canvas.restoreToCount(savedState);
+
 
         }
 
@@ -411,20 +425,31 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     }
     //create the initial borders and the new game method. This will be called every time the player dies
-    // and we want to reset the game.
+    // and we want to reset the game. (player dies, you wait 2500 milliseconds and then newGame methods is called
+    // and creates a new game.
     public void newGame()
     {
+        dissapear=false; //9want helicopter to appear again)
+
+
         botborder.clear();
         topborder.clear();
+
         missiles.clear();
         smoke.clear();
 
-        //reset min border height
+        //reset min and max border height
         minBorderHeight = 5;
         maxBorderHeight = 30;
+
         player.resetDY();
         player.resetScore();
         player.setY(HEIGHT/2);
+
+        if(player.getScore() > best)
+        {
+            best = player.getScore();
+        }
 
         //create initial borders- this loop will create borders until they are width+40 off the screen.
         //will create enough borders so they go off the screen slightly.
